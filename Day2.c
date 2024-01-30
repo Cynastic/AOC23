@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <stdbool.h>
 
 int getDigit(char* str)
 {
@@ -48,7 +47,6 @@ int main()
     {
         char* currentPart = strtok(currentLine, ",;:\n");
         int gameID = getGameID(currentPart);
-        bool addToSum = true;
 
         int redMax = 0;
         int blueMax = 0;
@@ -71,22 +69,18 @@ int main()
             switch(currentPart[i + 1])
             {
                 case 'r':
-                    if(amount > 12) addToSum = false;
                     if(amount > redMax) redMax = amount;
                     break;
                 case 'g':
-                    if(amount > 13) addToSum = false;
                     if(amount > greenMax) greenMax = amount;
                     break;
                 case 'b':
-                    if(amount > 14) addToSum = false;
                     if(amount > blueMax) blueMax = amount;
                     break;
             }
-
             currentPart = strtok(NULL, ",;:\n");
         }
-        if(addToSum == true)
+        if(redMax <= 12 && greenMax <= 13 && blueMax <= 14)
         {
             sumOfId += gameID;
         }
